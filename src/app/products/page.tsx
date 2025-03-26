@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * usepathnam, userouter,useSearchparam, useParams only useing in client ocmponents
+ */
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 

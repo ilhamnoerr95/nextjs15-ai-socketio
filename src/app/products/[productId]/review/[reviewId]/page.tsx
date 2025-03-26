@@ -1,11 +1,13 @@
-import React from "react";
+"use client";
 
-const ReviewDetail = async ({
+import React, { use } from "react";
+
+const ReviewDetail = ({
 	params,
 }: {
 	params: Promise<{ productId: string; reviewId: string }>;
 }) => {
-	const { productId, reviewId } = await params;
+	const { productId, reviewId } = use(params);
 	return (
 		<div>
 			{reviewId} for product Id {productId}
