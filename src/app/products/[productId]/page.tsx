@@ -43,7 +43,7 @@ const DetailProduct = async ({ params }: Props) => {
 				<Link href={`/products/${productId}/review/123`}>Review 123</Link>
 				<Link href={`/products/${productId}/review/223`}>Review 223</Link>
 				<Link href={`/products/${productId}/review/323`}>Review 323</Link>
-				<Link href={`/products/${productId}/review/423`}>Review 423</Link>
+				<Link href={`/products/${productId}/review/423`}>Review 4 23</Link>
 			</div>
 		</div>
 	);

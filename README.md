@@ -34,3 +34,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Layout.tsx Vs Template.tsx
+
+> layout shared between multiple pages in app, layout only mount hte new page conten while keeping common element intact they don't remount shared components which leads to better performance
+> Tempalte similar to layouts in that they are also ui share between multiple pages in app, whenever user navigates between routes sharing a template, they will get completely fresh start such as: new template component instance is mounted, Dom Element are recreated, state is cleared , effects are re-synchronized
