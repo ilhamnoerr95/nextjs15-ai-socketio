@@ -39,3 +39,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 > layout shared between multiple pages in app, layout only mount hte new page conten while keeping common element intact they don't remount shared components which leads to better performance
 > Tempalte similar to layouts in that they are also ui share between multiple pages in app, whenever user navigates between routes sharing a template, they will get completely fresh start such as: new template component instance is mounted, Dom Element are recreated, state is cleared , effects are re-synchronized
+
+## Special files
+
+1. page.tsx
+2. layout.tsx
+3. template.tsx
+4. not-found.tsx
+5. loading.tsx - loading states - loading file will be wrapped into page file
