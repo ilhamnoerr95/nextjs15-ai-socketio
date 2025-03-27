@@ -45,6 +45,15 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				{children}
+				<footer
+					style={{
+						backgroundColor: "yellow",
+						padding: "1rem",
+						color: "black",
+					}}
+				>
+					footer
+				</footer>
 			</body>
 		</html>
 	);

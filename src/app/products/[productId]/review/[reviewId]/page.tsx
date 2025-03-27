@@ -7,6 +7,13 @@ const ReviewDetail = ({
 }: {
 	params: Promise<{ productId: string; reviewId: string }>;
 }) => {
+	const err = Math.floor(Math.random() * 2);
+	console.log(err);
+
+	if (err === 1) {
+		throw new Error("test error in page");
+	}
+
 	const { productId, reviewId } = use(params);
 	return (
 		<div>

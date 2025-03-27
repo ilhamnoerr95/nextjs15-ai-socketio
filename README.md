@@ -47,3 +47,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 3. template.tsx
 4. not-found.tsx
 5. loading.tsx - loading states - loading file will be wrapped into page file
+6. error.tsx - error handling
+7. global-error.tsx - global error handling - only occurs in production mode -requires html and body tags to be rendered
