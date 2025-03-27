@@ -49,3 +49,34 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 5. loading.tsx - loading states - loading file will be wrapped into page file
 6. error.tsx - error handling
 7. global-error.tsx - global error handling - only occurs in production mode -requires html and body tags to be rendered
+
+---
+
+## Paraller routes
+
+- using slots are not route segments dont affect url structure
+
+### use case of paralle routes
+
+1. dashboard with multiple sections
+2. split-view interafaces
+3. multi-pane layouts
+4. complex admin interface
+
+### paraller routes benefits
+
+1. paraller routes are great for splitting a layout into manageable slots (especially when different team work on diffrent parts)
+2. independent route handling
+3. sub-navigation
+
+### independet route handling
+
+Each slot in layout,such as users, revenue and notif can handle its own loading and error states that like each folder/file isolated.
+this granular control is particulary useful in scenarios where differet sections of the page loading at varying speeds or encounter unique errors
+
+### sub-navitaion in routes
+
+Each slot can essentially funciton as mini application, complete with its own navigation and state management.
+users can interact with each section separately, applying filters, sorting data, or navigating through pages without affection other parts.
+
+---
