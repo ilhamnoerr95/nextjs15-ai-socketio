@@ -79,4 +79,9 @@ this granular control is particulary useful in scenarios where differet sections
 Each slot can essentially funciton as mini application, complete with its own navigation and state management.
 users can interact with each section separately, applying filters, sorting data, or navigating through pages without affection other parts.
 
+### unmatching routes
+
+- navigating from UI: when navigating click through ui, nextjs keep showing content show before
+- page reload: when reload occured, nextjs look for 'default.tsx' file for default each slot, default.tsx is critical file that as it serve as fallback render content that cannot retrieve slots from the current url.
+
 ---

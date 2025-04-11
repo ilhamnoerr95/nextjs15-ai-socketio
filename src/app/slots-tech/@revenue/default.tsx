@@ -7,7 +7,7 @@ const Revenue = async () => {
 			resolve(true);
 		}, 5000);
 	});
-	return <Card>Revenue</Card>;
+	return <Card>Default Revenue</Card>;
 };
 
 export default Revenue;
