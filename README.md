@@ -81,7 +81,16 @@ users can interact with each section separately, applying filters, sorting data,
 
 ### unmatching routes
 
-- navigating from UI: when navigating click through ui, nextjs keep showing content show before
+- navigating from UI: when navigating click through ui, nextjs keep showing content before
 - page reload: when reload occured, nextjs look for 'default.tsx' file for default each slot, default.tsx is critical file that as it serve as fallback render content that cannot retrieve slots from the current url.
+
+---
+
+---
+
+### Intercepting Routes
+
+- this function render the page without move the real page. this just like preview the page before refresh to get a real page (same like pop up/modal) for seamless display perfomance.
+- interceepting routes convention (.) to match segments on the same level
 
 ---
