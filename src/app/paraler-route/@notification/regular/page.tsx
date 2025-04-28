@@ -7,7 +7,7 @@ const Notif = async () => {
 		<Card>
 			Regular notif
 			{/* redirect to router in slot */}
-			<Link href="/slots-tech"> Archieved notif</Link>
+			<Link href="/paraler-route"> Archieved notif</Link>
 		</Card>
 	);
 };

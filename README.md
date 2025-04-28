@@ -91,6 +91,6 @@ users can interact with each section separately, applying filters, sorting data,
 ### Intercepting Routes
 
 - this function render the page without move the real page. this just like preview the page before refresh to get a real page (same like pop up/modal) for seamless display perfomance.
-- interceepting routes convention (.) to match segments on the same level
+- interceepting routes convention (.) or (..) or (..)(..) or (...) to match segments router folder
 
 ---
