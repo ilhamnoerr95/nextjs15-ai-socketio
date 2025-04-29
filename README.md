@@ -90,7 +90,16 @@ users can interact with each section separately, applying filters, sorting data,
 
 ### Intercepting Routes
 
-- this function render the page without move the real page. this just like preview the page before refresh to get a real page (same like pop up/modal) for seamless display perfomance.
+- this function render the page without move the real page. this just like preview the page before refresh to get a real page (same like pop up/modal) for seamless display perfomance. Best practice fit for modal, drawer, overlay.
 - interceepting routes convention (.) or (..) or (..)(..) or (...) to match segments router folder
 
 ---
+
+---- 
+
+### ROUTE HANDLERS
+
+Route handlers are similar to APIs running on the server, like when using Node.js and Express. The convention for route handlers in the App Router is different from that of page components, but route handlers are very flexible.
+The convention follows this structure: folder/route.ts. However, if both a page file and a route handler exist in the same folder, a conflict will occur. In such cases, the route handler will take precedence and be displayed instead of the page route.
+
+----
