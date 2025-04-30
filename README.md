@@ -54,6 +54,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Paraller routes
 
+pararel route is multiple route rendering parerel in the same layout.
+
 - using slots are not route segments dont affect url structure
 
 ### use case of paralle routes
@@ -138,3 +140,27 @@ middleware lets specify paths where it shoud be active:
 2. conditional statements
 
 ---
+
+### RENDER
+
+## CSR (CLIENT SIDE RENDERING)
+
+Client side rendering is popular for SPA, this approach - where browser (client ) transform react component into what u see on screen - thats what call client-side rendering. But csr have drawbacks like SEO, browser has to do everything: fetch data, build UI make everythin intercative in client, Users often end up staring at a blank screen or loading spinner while all this happens, everyting time add new feature, that js bundle get bigger making users wait even longer.
+Process of csr => user request => server will send html & js bunde in clien => client get blank screen => client req js => server sent js to client => html initial render.
+
+## SSR (SERVER SIDE RENDERING)
+
+this recollecting drawbacks of Csr, because ssr will generate html first in server so users see actual htmlc content right away instead of blank screen or spinners. So this make Seo better than CSR, and perfoamcne and UX much better to avoiding from suffering slow load time when their browser download, execute js before seeing any meaningful content.
+
+process of ssr => user request => fetch all data in server and genrate html in server => sent to client with full html and js code bundler => js requeset from client to server => server sending back js to load full on client => hydration => interacice ui.
+
+Although ssr so fast, still have drawbacks such as:
+
+1. fetch everyting before show anyting, when u wanna display html in client, data must be fetched done before generate html.
+2. Hydrate began when js full loaded in client.
+3. Hydrate all component before intreact with anything.
+
+to overcome all this drawbacks:
+
+1. using suspense talk to react, dont wait the content have suspense when wanna show anything. if particular section is slow and could potentially delay the intial html, no problem. it can be seamlessly integrated into the stream later when its ready
+2. Using react lazy, tell the react these part of code are'nt urgent - split them into separate script. using react.lazy for code splitting separates main sections code from the core js bundle. so Nextjs no need to wait to hydrate before all js loaded.
