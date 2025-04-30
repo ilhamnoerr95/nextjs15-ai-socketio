@@ -95,11 +95,46 @@ users can interact with each section separately, applying filters, sorting data,
 
 ---
 
----- 
+---
 
 ### ROUTE HANDLERS
 
 Route handlers are similar to APIs running on the server, like when using Node.js and Express. The convention for route handlers in the App Router is different from that of page components, but route handlers are very flexible.
 The convention follows this structure: folder/route.ts. However, if both a page file and a route handler exist in the same folder, a conflict will occur. In such cases, the route handler will take precedence and be displayed instead of the page route.
 
-----
+---
+
+### Headers in Route handlers
+
+HTTP headers represnet hte metadata associated with an API request and response.
+
+## Request Headers
+
+These are sent by the client, such as a web brwoser, to the server. they contain essential information about the request, which helps the server understand and process it correctly.
+
+'user-agent' which identifies the browser and OS to the server.
+
+'Accept' which indicates the content types like text, video or image formats that the client can process.
+
+'Authorization' header used by the client to authenticate itself to the server
+
+## Response Headers
+
+These are sent back from the server to client. they provide information about the server and the data being sent in the reponse.
+
+'Content-Type' header which indicate the media type of the response. it tells the client what the data type of the returned content is, such as text/html for html documents, application/json for JSON data, etc.
+
+### caching in route handler
+
+Caching in route handler coul using export const dynamic = "force-static" this will be running when application already build, then this will be change when the application rebuild. When we want to revalidate it, just using ISR (incrementar static regeneration) => using epoxrt const revalidate = 10;
+
+### MIDDLEWARE
+
+intercepted request, in this session will check all over where we need before continue the request.
+
+middleware lets specify paths where it shoud be active:
+
+1. custom matcher config.
+2. conditional statements
+
+---

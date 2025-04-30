@@ -1,4 +1,5 @@
 import { dataDummy } from "@/app/data/data";
+import { headers } from "next/headers";
 
 /**
  *
@@ -10,6 +11,8 @@ import { dataDummy } from "@/app/data/data";
 import { NextRequest } from "next/server";
 
 export async function GET(Req: NextRequest) {
+	const headerlist = await headers();
+	console.log(headerlist.get("Authorization"));
 	const searchParam = Req.nextUrl.searchParams;
 	const query = searchParam.get("name");
 	const filterData = query
