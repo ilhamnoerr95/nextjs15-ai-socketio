@@ -164,3 +164,28 @@ to overcome all this drawbacks:
 
 1. using suspense talk to react, dont wait the content have suspense when wanna show anything. if particular section is slow and could potentially delay the intial html, no problem. it can be seamlessly integrated into the stream later when its ready
 2. Using react lazy, tell the react these part of code are'nt urgent - split them into separate script. using react.lazy for code splitting separates main sections code from the core js bundle. so Nextjs no need to wait to hydrate before all js loaded.
+
+## REACT SERVER COMPONENT (RSC)
+
+RSC represnt a new architecture designed by reac team. This approach leverages the strenghts of both server and client environments to optimize efficeency, load time and interactivity. The artchitecture introduces a dual-component model: Client and Server component. This distinction is based not on the components functionality but rather on their execution env and the specific systems they are designed to interact with.
+
+### Client Components
+
+Typically renderen on the client-side (CSR) , but can also be rendered to HTML on the server (ssr), allowing users to immediately see the page's html content rather than a blank screen. Client component can render on the server, optimization strategy, client component primarily operate on the client but cant (and should) also run once on the server for better perfonace.
+
+Client component have full access to the client env, such as the browser , allowing them to use state, effects , event listener for handling interactivity. also access browser-exclusive API LIKE GEOLOCATION or localStorage allowing u to build ui for specofct ise cases, The term of Client component doeesnt signify anything new; it simply help differntiate these component from newly introduced server components.
+
+### Server components
+
+Code stays on the server and never downloaded to the client.
+
+### Benerif of Server components
+
+1. Smaller bundle sizes. Since Server components stay on the server, all their dependencies stay there too. This is fantastic for users with slower connection or less powerful devices since they don't need to download, parse and execute that js. There's no hydarion step, making app load an become interactive faster.
+2. Direct access to server-side resources. Server component can talk directly to db and file systems, makin data fetching super efficient without any client-sside processing. use server power and proximity to data sources to manage compute-intensisve rendering tasks.
+3. enhanced security, since server component can only run on server, sensitive data and logic - like api key and token never leave the server.
+4. imporved data fecthin. Server component allow to move data fetching to the server, close to your data source. can imporove perfomance by reducing time it takes to fetch data needed for rendering and the number of requests the client needs to make.
+5. caching. when render on the server, can cahe the resuls and reuse them for diffrent users and requests. it means better perfomance and lower costs since not re-rendering and re-fetching data all the time.
+6. faster initial page load and first contentful paint. By generating html on the server, users see content immediately - no waiting for js to dwonload and execute.
+7. imporved seo, search engines bots can easily read the server-rendered html, makinng your pages more indexable.
+8. efficient streaming, server components can split the rendering process into chunks that stream to the client as they're ready. this means users start seeing content faster instead of waiting for the entire page to render on the server.
