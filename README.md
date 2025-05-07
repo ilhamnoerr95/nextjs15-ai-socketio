@@ -167,19 +167,19 @@ to overcome all this drawbacks:
 
 ## REACT SERVER COMPONENT (RSC)
 
-RSC represnt a new architecture designed by reac team. This approach leverages the strenghts of both server and client environments to optimize efficeency, load time and interactivity. The artchitecture introduces a dual-component model: Client and Server component. This distinction is based not on the components functionality but rather on their execution env and the specific systems they are designed to interact with.
+RSC represnt a new architecture designed by reac team. This approach leverages the strenghts of both server and client environments to optimize efficeency, load time and interactivity. The artchitecture introduces a dual-component model: Client and Server component. This distinction is based not on the components functionality but rather on their execution env and the specific systems they are designed to interact with. Key of React server component: Browser, nextjs ,reactjs
 
 ### Client Components
 
 Typically renderen on the client-side (CSR) , but can also be rendered to HTML on the server (ssr), allowing users to immediately see the page's html content rather than a blank screen. Client component can render on the server, optimization strategy, client component primarily operate on the client but cant (and should) also run once on the server for better perfonace.
 
-Client component have full access to the client env, such as the browser , allowing them to use state, effects , event listener for handling interactivity. also access browser-exclusive API LIKE GEOLOCATION or localStorage allowing u to build ui for specofct ise cases, The term of Client component doeesnt signify anything new; it simply help differntiate these component from newly introduced server components.
+Client component have full access to the client env, such as the browser, allowing them to use state, effects , event listener for handling interactivity. also access browser-exclusive API LIKE GEOLOCATION or localStorage allowing u to build ui for specofct ise cases, The term of Client component doeesnt signify anything new; it simply help differntiate these component from newly introduced server components.
 
 ### Server components
 
 Code stays on the server and never downloaded to the client.
 
-### Benerif of Server components
+### Benefit of Server components
 
 1. Smaller bundle sizes. Since Server components stay on the server, all their dependencies stay there too. This is fantastic for users with slower connection or less powerful devices since they don't need to download, parse and execute that js. There's no hydarion step, making app load an become interactive faster.
 2. Direct access to server-side resources. Server component can talk directly to db and file systems, makin data fetching super efficient without any client-sside processing. use server power and proximity to data sources to manage compute-intensisve rendering tasks.
@@ -189,3 +189,14 @@ Code stays on the server and never downloaded to the client.
 6. faster initial page load and first contentful paint. By generating html on the server, users see content immediately - no waiting for js to dwonload and execute.
 7. imporved seo, search engines bots can easily read the server-rendered html, makinng your pages more indexable.
 8. efficient streaming, server components can split the rendering process into chunks that stream to the client as they're ready. this means users start seeing content faster instead of waiting for the entire page to render on the server.
+
+## LIFECYCLE OF REACT SERVER COMPONENT (RSC)
+
+there are 3 keys of lifecyle redering: client/browser, nextjs and react. this diffrent from csr and ssr lifecyle.
+
+### Render for client
+
+note: if server components suspend react will be paused rendering substree instead give a placeholder value and react will prepare for instructions to client component later.
+
+1. initial Sequence: user request with url -> next js will be matches the url to the server compontents -> next js instruct react to render server component. react will render server component any child component also server component to convert into json format as RSC payload -> react send to next js and next js will be take both of rsc payload and client component instruction to generate html on server -> html will be stream right away to browser to give uninteractive ui preveiw of the route at the same time next js will be streams rsc payload as react render each piece of ui, once reaches the browser next js will be process everything streamed at over, reactjs uses rsc payload and client component instruction to progressively render ui -> after all client and server component output the final ui, all state display to users -> client component undergo hydration to make static ui become interactive ui.
+2. Update Sequence: refetch from brwoser sent route to nextjs => nextjs receive it and matches that routes to server component => next js will tel to reacts render server compnent this part same as initial sequence => react will render everthing and send rsc payload to next js => but instead next js not will generate html it will be streams progressively the response data straight forward back to the client and trigger rerender of the route using new content, and react will reconcile carefully to merge the new rendered output with the existion component on the screen then updated everthing UI.
