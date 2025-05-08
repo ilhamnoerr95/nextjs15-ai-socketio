@@ -141,14 +141,14 @@ middleware lets specify paths where it shoud be active:
 
 ---
 
-### RENDER
+## RENDER
 
-## CSR (CLIENT SIDE RENDERING)
+### CSR (CLIENT SIDE RENDERING)
 
 Client side rendering is popular for SPA, this approach - where browser (client ) transform react component into what u see on screen - thats what call client-side rendering. But csr have drawbacks like SEO, browser has to do everything: fetch data, build UI make everythin intercative in client, Users often end up staring at a blank screen or loading spinner while all this happens, everyting time add new feature, that js bundle get bigger making users wait even longer.
 Process of csr => user request => server will send html & js bunde in clien => client get blank screen => client req js => server sent js to client => html initial render.
 
-## SSR (SERVER SIDE RENDERING)
+### SSR (SERVER SIDE RENDERING)
 
 this recollecting drawbacks of Csr, because ssr will generate html first in server so users see actual htmlc content right away instead of blank screen or spinners. So this make Seo better than CSR, and perfoamcne and UX much better to avoiding from suffering slow load time when their browser download, execute js before seeing any meaningful content.
 
@@ -198,5 +198,25 @@ there are 3 keys of lifecyle redering: client/browser, nextjs and react. this di
 
 note: if server components suspend react will be paused rendering substree instead give a placeholder value and react will prepare for instructions to client component later.
 
-1. initial Sequence: user request with url -> next js will be matches the url to the server compontents -> next js instruct react to render server component. react will render server component any child component also server component to convert into json format as RSC payload -> react send to next js and next js will be take both of rsc payload and client component instruction to generate html on server -> html will be stream right away to browser to give uninteractive ui preveiw of the route at the same time next js will be streams rsc payload as react render each piece of ui, once reaches the browser next js will be process everything streamed at over, reactjs uses rsc payload and client component instruction to progressively render ui -> after all client and server component output the final ui, all state display to users -> client component undergo hydration to make static ui become interactive ui.
-2. Update Sequence: refetch from brwoser sent route to nextjs => nextjs receive it and matches that routes to server component => next js will tel to reacts render server compnent this part same as initial sequence => react will render everthing and send rsc payload to next js => but instead next js not will generate html it will be streams progressively the response data straight forward back to the client and trigger rerender of the route using new content, and react will reconcile carefully to merge the new rendered output with the existion component on the screen then updated everthing UI.
+1. initial Sequence: user request with url -> next js will be matches the url to the server compontents -> next js instruct react to render server component. react will render server component any child component to convert into json format as RSC payload -> react send to next js and next js will be take both of rsc payload and client component instruction to generate html on server -> html will be stream right away to browser to give uninteractive ui preveiw of the route at the same time next js will be streams rsc payload as react render each piece of ui, once reaches the browser next js will be process everything streamed at over, reactjs uses rsc payload and client component instruction to progressively render ui -> after all client and server component output the final ui, all state display to users -> client component undergo hydration to make static ui become interactive ui.
+2. Update Sequence: refetch from brwoser sent route to nextjs => nextjs receive it and matches that routes to server component => next js will tel to reacts render server compnent this part same as initial sequence => react will render everthing and send rsc payload to next js => but instead next  js not will generate html it will be streams progressively the response data straight forward back to the client and trigger rerender of the route using new content, and react will reconcile carefully to merge the new rendered output with the existion component on the screen then updated everthing UI.
+
+### 3 strategies render on server
+
+1. Static: server rendering strategy where generate html pages when building applicaiton. this pages will preparing all content in advance, before users visit the page. Once built, pages can be cached by cdns and served instantly to user. This approach, same pre-rendered page can be shared among different users, giving app a significant perf boost. Static rendering perfect for blog post, e-commerce product listing, documentation and marketing pages. static rendering is default strategy for app router thatt all routes are autmotically prepared at build time without any addtional setup.
+   > ### Production vs dev server
+   >
+   > In production, create one optimized build and deploy it - no on-the-fly changes after deployment
+   > A development server, focues on the developer experience, need to changes immadiately in browser without rebuilding app everytime
+   > production, pages are pre-rendered once during the build.
+   > development, pages are pre-rendered on every request.
+   
+   > [!NOTE]
+   > Summary:
+   > 1. static rendereing is a strategy where the html is generated at build time
+   > 2. along with the html, rsc payloads for components and javascript chunks for client-side hydration are created
+   > 3. direct route visits serve htmls files
+   > 4. client-side navigations uses RSC payloads and Javascroipt chunks without additional server requests
+
+2. Dynamic
+3. Streaming
