@@ -199,24 +199,38 @@ there are 3 keys of lifecyle redering: client/browser, nextjs and react. this di
 note: if server components suspend react will be paused rendering substree instead give a placeholder value and react will prepare for instructions to client component later.
 
 1. initial Sequence: user request with url -> next js will be matches the url to the server compontents -> next js instruct react to render server component. react will render server component any child component to convert into json format as RSC payload -> react send to next js and next js will be take both of rsc payload and client component instruction to generate html on server -> html will be stream right away to browser to give uninteractive ui preveiw of the route at the same time next js will be streams rsc payload as react render each piece of ui, once reaches the browser next js will be process everything streamed at over, reactjs uses rsc payload and client component instruction to progressively render ui -> after all client and server component output the final ui, all state display to users -> client component undergo hydration to make static ui become interactive ui.
-2. Update Sequence: refetch from brwoser sent route to nextjs => nextjs receive it and matches that routes to server component => next js will tel to reacts render server compnent this part same as initial sequence => react will render everthing and send rsc payload to next js => but instead next  js not will generate html it will be streams progressively the response data straight forward back to the client and trigger rerender of the route using new content, and react will reconcile carefully to merge the new rendered output with the existion component on the screen then updated everthing UI.
+2. Update Sequence: refetch from brwoser sent route to nextjs => nextjs receive it and matches that routes to server component => next js will tel to reacts render server compnent this part same as initial sequence => react will render everthing and send rsc payload to next js => but instead next js not will generate html it will be streams progressively the response data straight forward back to the client and trigger rerender of the route using new content, and react will reconcile carefully to merge the new rendered output with the existion component on the screen then updated everthing UI.
 
 ### 3 strategies render on server
 
-1. Static: server rendering strategy where generate html pages when building applicaiton. this pages will preparing all content in advance, before users visit the page. Once built, pages can be cached by cdns and served instantly to user. This approach, same pre-rendered page can be shared among different users, giving app a significant perf boost. Static rendering perfect for blog post, e-commerce product listing, documentation and marketing pages. static rendering is default strategy for app router thatt all routes are autmotically prepared at build time without any addtional setup.
+1. Static: server rendering strategy where generate html pages when building applicaiton. this pages will preparing all content in advance, before users visit the page. Once built, pages can be cached by cdns and served instaNntly to user. This approach, same pre-rendered page can be shared among different users, giving app a significant perf boost. Static rendering perfect for blog post, e-commerce product listing, documentation and marketing pages. static rendering is default strategy for app router thatt all routes are autmotically prepared at build time without any addtional setup.
+
    > ### Production vs dev server
    >
    > In production, create one optimized build and deploy it - no on-the-fly changes after deployment
    > A development server, focues on the developer experience, need to changes immadiately in browser without rebuilding app everytime
    > production, pages are pre-rendered once during the build.
    > development, pages are pre-rendered on every request.
-   
+
    > [!NOTE]
    > Summary:
+   >
    > 1. static rendereing is a strategy where the html is generated at build time
    > 2. along with the html, rsc payloads for components and javascript chunks for client-side hydration are created
    > 3. direct route visits serve htmls files
    > 4. client-side navigations uses RSC payloads and Javascroipt chunks without additional server requests
 
-2. Dynamic
-3. Streaming
+2. Dynamic: Dynamic renderngin is strategy just only renderin in server,available when make request time. best practice for this strategy is: news websites, personalized shopping page, social media feeds.
+   > [!NOTE]
+   > how to dynamic routes work: nextjs will be switches to dynamic rendering for entire routes when it detects what we call "dynamic function" or "dynamic api"
+   > in nextjs, dynamic function are: cookies(), headers(), connection(), draftmode(), searchparams props, after() => when using these function it will be automaticcaly entire route into dynamic rendering at request time.
+   > dynamic rendering render in build time you will know how the route will be dynamic or not, it will marked by f symbol
+3. Streaming: Strategy that allow progressive UI rendering from server, that break down into smaller chunks and streamed to client as soon as ready. this means user can see the part of page ui without waiting for everything to load. this to imporove intial page load times, although the page fetch is slower that makes normally hold up the entire route -> this example is like using "suspend boundaries"
+
+### server and client component composition patern
+
+1. server components : fetching data, accessing backend resources directly, keeping secret information like token, api keys secure on the server, handling large dependeching, which means less javascript to client download it. #note when the component just only run in server you must be install "npm -i server-only" so the component just run in server only, why have to separate from client component because in real case server component to secure the sensitive data, perfomance , reliability.
+2. client components: adding interactivity, handling event listener (onClick, onChange), manage state & life cylce effect (useState, useEffect), implenting cusomt hook, working with browser-specifics api, using react class component. client component have "client-only" code that just running in client, this prevent to running in server component. #note: when parent of component running with client-component all the child will be working on client-side to and will be losing the benefit of server-side components, make the client-component to using as far down the tree as possible.
+3. third party Packages: third-party packages are starting to add the "use client" directive to component that need client-side features, making it clear where they should run, many npm packages haven't made this transition yet, this means while they work fine in client components, they might break or fail compltely in server components, we can wrap the third-party components that need client-side feature in our own client components.
+4. context providers: context providers typically live near the root of an app to share global state and logic, React context isn't supported in server components. This solution to create context and render its provider inside a dedicated client component
+5. interleaving server and client components: using a server component as a parent of a client component, this means the server component will be rendered on the server, and the client component will be rendered on the client, this allow to use client component in server component and vice versa, this is useful when you want to use client component in server component but you want to avoid the hydration process. By default component will runnin in server, when using server component inside client it will be get an errors because of when u create a component that using client component the children will be make client to, but this could be resolve the server component will be wrapped as slot/childrend of client component.
