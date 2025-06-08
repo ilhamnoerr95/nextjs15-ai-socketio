@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
  * meta data have 2 ways in next js, put in root layout or page
  * when we put in root layout all routes will applies with this meata data
  * when use meta data in page it will be specified for that page route
- * but when we hae meatadata in layout and page to, the priority will be used with metadata page route
+ * but when we have meatadata in layout and page to, the priority will be used with metadata page route
  * all meta data filled in page will be overwritten in  metadata root layout
  * ! meta data just allowed in server component
  */
