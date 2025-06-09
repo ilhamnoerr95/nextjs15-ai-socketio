@@ -246,3 +246,21 @@ note: if server components suspend react will be paused rendering substree inste
 > Sequential: Requeset in a component tree are dpendent on each other. this can lead to longer loading times.
 >
 > Parallel: request in a route are eagerly initated and will load data the same time. reduces the total time i takes to load data.
+
+## SERVER ACTIONS
+
+server action is asyncrhonous function that executed on the server, and can be used to handle user interactions, such as submitting forms or handling API requests. server action can be used to fetch data, validate user input, and perform any other server-side operations that require a response.
+
+benefit: 1. simplified code => the code no need for separate api routes or client-side state managmenet for form data, 2.improved security: boost security by keeping sensitive operaton server-side, away from potential threats, 3. Better performance: improve perf because there's less js running on the cliend, leading to faster load times and better core web vitals, 4. progressive enhancement: forms keep working even js is turned off in browser - making app more accessible and resilient.
+
+## useFormStatus
+
+React hook that give status information about the last form submission
+
+ex: const status = useFormStatus();
+useFormStatus() returns an object with the following properties:
+
+1. pending: a boolean that indicate if the parent <> is currently submiting
+2. data: an object containing the forms submission data
+3. method: a string (either "get" or post) showing the http method being used
+4. action: a reference to the function that was passed to the parent form action prop
