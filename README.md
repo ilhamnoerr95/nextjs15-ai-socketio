@@ -239,3 +239,10 @@ note: if server components suspend react will be paused rendering substree inste
 
 1. The rsc architecture supports async and await keywords in Server Components, this means can write data fetching code just like reguler js.
 2. Req memouization its means can fetch data wherever u need it in your components tree without worrying about duplicate network requests. React will only make the actual fetch once and reuse the result for subsequent calls during the sam render pass
+
+> [!NOTE]
+> When fetching data inside components, need to be aware of 2 data fetching patterns: 1. Sequential , 2. Parallel
+>
+> Sequential: Requeset in a component tree are dpendent on each other. this can lead to longer loading times.
+>
+> Parallel: request in a route are eagerly initated and will load data the same time. reduces the total time i takes to load data.
