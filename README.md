@@ -255,7 +255,7 @@ benefit: 1. simplified code => the code no need for separate api routes or clien
 
 ## useFormStatus
 
-React hook that give status information about the last form submission
+React hook that give status information about the last form submission, this hook just only work inside <form> tag and client side.
 
 ex: const status = useFormStatus();
 useFormStatus() returns an object with the following properties:
@@ -264,3 +264,16 @@ useFormStatus() returns an object with the following properties:
 2. data: an object containing the forms submission data
 3. method: a string (either "get" or post) showing the http method being used
 4. action: a reference to the function that was passed to the parent form action prop
+
+## useActionState
+
+Is react hook that allows to update state based on the result of a form action, it is particulary helpful for handling form validation and error messsages. This only work in client side.
+
+useActionState() havee 2 params: server action & initial form state. this hook return an array with 3 things: the current form state, a new form action, boolean indicates if action currently is being executed.
+
+## useFromStatus vs useActionState (pending vs isPending)
+
+Both of these hooks are determine if a form is being submitted. The pending state from useFormStatus() is specially for form submission. isPending from useActionSate() can be used with any action, not just form submissions.
+
+1. when u using pending in useFormStatus() it will good to building reusable compnent that are meant to live inside form, example: a loading spinner that can be used across diffrent form in applicaitons.
+2. when using isPending => when need to keep track of  server actions that aren't necessary related to form submissions. it give extra flexibilty.
