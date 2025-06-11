@@ -277,3 +277,14 @@ Both of these hooks are determine if a form is being submitted. The pending stat
 
 1. when u using pending in useFormStatus() it will good to building reusable compnent that are meant to live inside form, example: a loading spinner that can be used across diffrent form in applicaitons.
 2. when using isPending => when need to keep track of  server actions that aren't necessary related to form submissions. it give extra flexibilty.
+
+## useOptimistic Hook
+
+is React hooks that provides a way to optimistically update the UI while an asyn action is underway, this technique helps make app more responsive, especially when working with FORM, instead of making users wait for server responses, we can show them the expected result right away.
+
+the hooks takes 2 parameters: 1. initial state that u want to optimistically update, 2. function determines how to update the state optimisically and this function takes 2 argument,first argument is current state, and the second to help create new state.
+
+the hooks will return 2 value of array, 1. result of optimistic state, 2. trigger to update optimistic state that will be bring a parameter for the parameter.
+
+> [!NOTE]
+> The useOptimistic hook will running before the server action is complete.
