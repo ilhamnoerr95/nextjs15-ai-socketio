@@ -269,14 +269,14 @@ useFormStatus() returns an object with the following properties:
 
 Is react hook that allows to update state based on the result of a form action, it is particulary helpful for handling form validation and error messsages. This only work in client side.
 
-useActionState() havee 2 params: server action & initial form state. this hook return an array with 3 things: the current form state, a new form action, boolean indicates if action currently is being executed.
+useActionState() have 2 params: server action & initial form state. this hook return an array with 3 things: the current form state, a new form action, boolean indicates if action currently is being executed.
 
 ## useFromStatus vs useActionState (pending vs isPending)
 
 Both of these hooks are determine if a form is being submitted. The pending state from useFormStatus() is specially for form submission. isPending from useActionSate() can be used with any action, not just form submissions.
 
 1. when u using pending in useFormStatus() it will good to building reusable compnent that are meant to live inside form, example: a loading spinner that can be used across diffrent form in applicaitons.
-2. when using isPending => when need to keep track of  server actions that aren't necessary related to form submissions. it give extra flexibilty.
+2. when using isPending => when need to keep track of server actions that aren't necessary related to form submissions. it give extra flexibilty.
 
 ## useOptimistic Hook
 
@@ -288,3 +288,30 @@ the hooks will return 2 value of array, 1. result of optimistic state, 2. trigge
 
 > [!NOTE]
 > The useOptimistic hook will running before the server action is complete.
+
+## FORM COMPONENT
+
+The form component is built on top of the html form element.
+
+comes with some powerful features that make it perfect for modern web app:
+
+1. automatically prefeches loading UI
+2. handling client-side navigation on form submission
+3. provides progressive enhancement out of the box
+
+## Authentication
+
+Most apps revolve around users
+
+When building for users, 3 fundamental concepts are:
+
+1. identify: verifying who someone is throug authentication.
+2. sessions - keep track of a users logged-in state across requests.
+3. Access - controls what they can do
+
+In developer terms, we all these authentication, sessions management and authorization.
+
+> [!note]
+>
+> 1. with react single-page apps, only dealing with client-side code.
+> 2. With next.js you've got to protect app from m3 different angles: client-side, server-side, and API routes.
